@@ -33,8 +33,10 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
-  app:
-    build: .
+  backend:
+    build:
+      context: ../backend/intune-cms
+      dockerfile: ../backend/intune-cms/Dockerfile
     container_name: intune-cms-backend
     depends_on:
       s3:
@@ -52,6 +54,22 @@ services:
       MINIO_SECRET_KEY: admin12345
     ports:
       - "8080:8080"
+  frontend:
+    build:
+      context: ../frontend/intune-cms
+      dockerfile: ../backend/intune-cms/Dockerfile
+    container_name: intune-cms-frontend
+    restart: always
+    depends_on:
+      - backend
+    ports:
+      - "4200:80"
+    networks:
+      - intune-cms-net
+
+networks:
+  intune-cms-net:
 
 volumes:
   minio_data:
+  postgres_data:
