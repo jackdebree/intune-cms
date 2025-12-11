@@ -1,13 +1,13 @@
-package com.intune.cms.intune_cms;
+package com.intune.cms;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-public class IntuneCmsApplication {
+public class CmsApplication {
 
 	public static void main(String[] args) {
-		SpringApplication.run(IntuneCmsApplication.class, args);
+		SpringApplication.run(CmsApplication.class, args);
 	}
 
 }

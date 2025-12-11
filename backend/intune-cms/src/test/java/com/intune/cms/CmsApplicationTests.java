@@ -1,10 +1,10 @@
-package com.intune.cms.intune_cms;
+package com.intune.cms;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class IntuneCmsApplicationTests {
+class CmsApplicationTests {
 
 	@Test
 	void contextLoads() {
