@@ -1,31 +1,31 @@
+# ----------------------------
+# Build stage
+# ----------------------------
 FROM node:20 AS build
 
-# Set work directory
 WORKDIR /app
+RUN npm install -g npm@11.6.2
 
-# Copy package.json and install dependencies
 COPY package*.json ./
-RUN npm install
+RUN npm ci
 
-# Copy the rest of the Angular project
 COPY . .
-
-# Build the Angular app
-RUN npm run build --configuration production
+ENV NODE_OPTIONS=--max_old_space_size=4096
+RUN npm run build
 
 # ----------------------------
-# 2. Serve with Nginx
+# Runtime stage (SSR)
 # ----------------------------
-FROM nginx:1.27
+FROM node:20-slim AS runtime
 
-# Remove default Nginx website
-RUN rm -rf /usr/share/nginx/html/*
+WORKDIR /app
+ENV NODE_ENV=production
 
-# Copy Angular dist folder (update name if needed)
-COPY --from=build /app/dist/intune-cms /usr/share/nginx/html
+COPY --from=build /app/dist/intune-cms ./dist/intune-cms
+COPY package*.json ./
 
-# Expose port 80 from the container
-EXPOSE 80
+RUN npm install --omit=dev
 
-# Start Nginx
-CMD ["nginx", "-g", "daemon off;"]
+EXPOSE 4000
+
+CMD ["node", "dist/intune-cms/server/server.mjs"]
