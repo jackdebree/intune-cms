@@ -2,6 +2,8 @@ package com.intune.cms.model;
 
 import java.time.Instant;
 
+import com.intune.cms.shared.UploadStatus;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -26,7 +28,7 @@ public class Audio {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String status;
+    private UploadStatus uploadStatus;
 
     private Instant uploadedAt;
     

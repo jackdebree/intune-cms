@@ -34,6 +34,6 @@ public class Project {
     private String description;
 
     @OneToMany(mappedBy = "project")
-    private List<Release> releases = new ArrayList<>();
+    private List<Release> releases;
 
 }

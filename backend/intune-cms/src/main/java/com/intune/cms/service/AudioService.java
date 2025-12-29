@@ -9,6 +9,8 @@ import org.springframework.stereotype.Service;
 import com.intune.cms.model.Audio;
 import com.intune.cms.model.AudioDTO;
 import com.intune.cms.repository.AudioRepository;
+import com.intune.cms.shared.UploadStatus;
+
 import io.minio.*;
 
 @Service
@@ -41,7 +43,7 @@ public class AudioService {
     public void startUploadAudioFile(AudioDTO audioDto){
         
         Audio audio = new Audio();
-        audio.setStatus("pending");
+        audio.setUploadStatus(UploadStatus.STARTED);
         audio.setFileName(audioDto.fileName());
         audio.setPath(audioDto.path());
         audio.setBitRate(audioDto.bitRate());
@@ -54,7 +56,7 @@ public class AudioService {
     public void completeUploadAudioFile(AudioDTO audioDto){
 
         Audio audio = new Audio();
-        audio.setStatus("complete");
+        audio.setUploadStatus(UploadStatus.COMPLETED);
         audio.setFileName(audioDto.fileName());
         audio.setPath(audioDto.path());
         audio.setBitRate(audioDto.bitRate());
