@@ -8,4 +8,16 @@ import { RouterModule } from '@angular/router';
     templateUrl: './sidebar.component.html'
 })
 
-export class SidebarComponent {}
+export class SidebarComponent {
+    user = {
+        name: "Guest User",
+        avatar: "/icons/default-avatar.avif"
+    }
+    navigation = {
+        home: "/icons/home-svgrepo-com.svg",
+        projects: "/icons/folder-svgrepo-com.svg",
+        releases: "/icons/record-svgrepo-com.svg",
+        tracks: "/icons/audio-playlist-svgrepo-com.svg",
+        content: "/icons/files-svgrepo-com.svg"
+    }
+}
